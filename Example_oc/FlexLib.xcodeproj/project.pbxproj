@@ -131,6 +131,7 @@
 		D2EDA724214B8B5C00B6A26D /* TestCollectionViewVC.xml in Resources */ = {isa = PBXBuildFile; fileRef = D2EDA723214B8B5C00B6A26D /* TestCollectionViewVC.xml */; };
 		D2EDA727214B8CC900B6A26D /* TestCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EDA726214B8CC900B6A26D /* TestCollectionCell.m */; };
 		D2EDA729214B8D7400B6A26D /* TestCollectionCell.xml in Resources */ = {isa = PBXBuildFile; fileRef = D2EDA728214B8D7400B6A26D /* TestCollectionCell.xml */; };
+		D9FFFE7F2B5786B30043E7B7 /* local_mac_ip.txt in Resources */ = {isa = PBXBuildFile; fileRef = D9FFFE7E2B5786B30043E7B7 /* local_mac_ip.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -327,6 +328,7 @@
 		D2EDA726214B8CC900B6A26D /* TestCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionCell.m; sourceTree = "<group>"; };
 		D2EDA728214B8D7400B6A26D /* TestCollectionCell.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = TestCollectionCell.xml; path = res/TestCollectionCell.xml; sourceTree = "<group>"; };
 		D4959FDDA4B59C6AB6BCBC7A /* libPods-FlexLib_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FlexLib_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9FFFE7E2B5786B30043E7B7 /* local_mac_ip.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = local_mac_ip.txt; sourceTree = SOURCE_ROOT; };
 		F1EA3C4A77DCE70224422A8A /* Pods-FlexLib_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlexLib_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlexLib_Tests/Pods-FlexLib_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -625,6 +627,7 @@
 		D2CF9CB91FD7EAFA00554A0C /* res */ = {
 			isa = PBXGroup;
 			children = (
+				D9FFFE7E2B5786B30043E7B7 /* local_mac_ip.txt */,
 				D23F615225A5A39B008A93B0 /* BinaryCell.flex */,
 				D29D0D58221BEA2500DE5543 /* TestFrameView.xml */,
 				D2208DCE2205937300B6819E /* TestXmlView.xml */,
@@ -696,6 +699,7 @@
 				FEA5E8EEB4AFE0028765288E /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
+				D9FFFE7D2B577AA80043E7B7 /* Run Get Mac IP Script */,
 				6003F588195388D20070C39A /* Resources */,
 				2C047ED85D47780586D3534C /* [CP] Copy Pods Resources */,
 			);
@@ -804,6 +808,7 @@
 				D26262831FE3C09B000F9841 /* splash.png in Resources */,
 				D272A8C41FD933990075DB1D /* TestScrollVC.xml in Resources */,
 				D26262851FE3D24A000F9841 /* alignItems.xml in Resources */,
+				D9FFFE7F2B5786B30043E7B7 /* local_mac_ip.txt in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				D2CF9CC51FD7EB0900554A0C /* test.xml in Resources */,
 				D272B7851FEF670F004447E2 /* Localizable.strings in Resources */,
@@ -886,6 +891,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D9FFFE7D2B577AA80043E7B7 /* Run Get Mac IP Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Get Mac IP Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# 获取本机ip\nlocal_ip=$(ifconfig -a | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' | tr -d \"addr:\")\necho \"${local_ip}\"\necho \"${local_ip}\" > \"local_mac_ip.txt\"\n\n";
 		};
 		FEA5E8EEB4AFE0028765288E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
