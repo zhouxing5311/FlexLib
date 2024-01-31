@@ -11,12 +11,16 @@
 
 #import "FlexAppDelegate.h"
 #import "FlexViewController.h"
+#import "FlexHotReloadUtil.h"
 
 @implementation FlexAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     FlexRestorePreviewSetting();
+    
+//    //指定ip模式
+//    [FlexHotReloadUtil updateServerIP:@"10.252.10.202"];
     
     NSString* path = [[NSBundle mainBundle]pathForResource:@"system" ofType:@"style"];
     [[FlexStyleMgr instance]loadClassStyle:path];

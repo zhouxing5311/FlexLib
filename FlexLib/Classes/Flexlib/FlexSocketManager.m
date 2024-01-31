@@ -8,7 +8,6 @@
 
 #import "FlexSocketManager.h"
 #import "FlexHotReloadUtil.h"
-//#import "AFNetWorking.h"
 
 #import <sys/types.h>
 #import <sys/socket.h>
@@ -40,11 +39,6 @@
         self.socketQueue = dispatch_queue_create("com.bosshi.flexhotreload", NULL);
         //设置初始网络状态
         [self updateMacIpNormal];
-        if (!self.connectToMapIpNormal) {
-            FHRLogger(@"无法连接电脑ip，未开启flex hot reload");
-        }
-//        //监听网络状态
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStatusChangeAcion) name:AFNetworkingReachabilityDidChangeNotification object:nil];
     }
     return self;
 }
@@ -52,39 +46,6 @@
 - (void)updateMacIpNormal {
     self.connectToMapIpNormal = [FlexHotReloadUtil isMacIpReachable];
 }
-
-//- (void)networkStatusChangeAcion {
-//    AFNetworkReachabilityStatus status = [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
-//    switch (status) {
-//        case AFNetworkReachabilityStatusReachableViaWiFi: {
-//            //wifi连接后更新状态
-//            self.connectToMapIpNormal = [FlexHotReloadUtil isMacIpReachable];
-//            FHRLogger([NSString stringWithFormat:@"连接wifi后更新可访问localhost状态：%@", self.connectToMapIpNormal ? @"可访问" : @"不可访问"]);
-//            break;
-//        }
-//        case AFNetworkReachabilityStatusReachableViaWWAN: {
-//            //4g网络
-//            self.connectToMapIpNormal = NO;
-//            FHRLogger(@"4g网络无法访问localhost");
-//            break;
-//        }
-//        case AFNetworkReachabilityStatusNotReachable: {
-//            //断网
-//            self.connectToMapIpNormal = NO;
-//            FHRLogger(@"网络连接断开，无法访问localhost");
-//            break;
-//        }
-//        case AFNetworkReachabilityStatusUnknown: {
-//            //网络状态未知，尝试连接localhost
-//            self.connectToMapIpNormal = [FlexHotReloadUtil isMacIpReachable];
-//            FHRLogger([NSString stringWithFormat:@"网络状态未知，可访问localhost状态：%@", self.connectToMapIpNormal ? @"可访问" : @"不可访问"]);
-//            break;
-//        }
-//        default: {
-//            break;
-//        }
-//    }
-//}
 
 - (void)initScoket {
     //非wifi环境不连接
@@ -136,7 +97,9 @@
             if (!self.isConnecting) {
                 [self connect];
             }
+            FHRLogger(@"开始连接电脑ip");
         } else {
+            FHRLogger(@"无法连接电脑ip");
             //关闭socket连接
             [[FlexSocketManager sharedInstance] disConnect];
         }

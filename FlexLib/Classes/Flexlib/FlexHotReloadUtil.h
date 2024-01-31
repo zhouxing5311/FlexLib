@@ -25,7 +25,7 @@ extern void FHRLogger(NSString *logString);
 @interface FlexHotReloadUtil : NSObject
 
 ///更新服务端地址（可选，当配置了local_mac_ip后可以不用更新服务端地址）
-+ (void)updateServerIP:(NSString *)serverIP;
++ (void)updateServerIP:(NSString *)ip;
 ///获取mac ip地址
 + (NSString *)getMacIp;
 ///判断能否访问电脑ip。超时1秒

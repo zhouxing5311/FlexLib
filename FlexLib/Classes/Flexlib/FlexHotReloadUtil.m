@@ -61,8 +61,8 @@ void FHRLogger(NSString *logString) {
     FHRLogger([NSString stringWithFormat:@"本地xml资源映射构建完成，数量：%ld", flexXmlPathMapData.allKeys.count]);
 }
 
-+ (void)updateServerIP:(NSString *)serverIP {
-    serverIP = serverIP;
++ (void)updateServerIP:(NSString *)ip {
+    serverIP = ip;
     //开始连接长连接
     [[FlexSocketManager sharedInstance] updateMacIpNormal];
     [[FlexSocketManager sharedInstance] connect];
