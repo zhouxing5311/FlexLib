@@ -16,7 +16,7 @@
     "tag": "3.2.2"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "default_subspecs": "standard",
   "subspecs": [

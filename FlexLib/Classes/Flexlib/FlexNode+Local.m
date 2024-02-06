@@ -10,7 +10,6 @@
 #import "FlexHotReloadUtil.h"
 #import "FlexSocketManager.h"
 #import "NSObject+AM.h"
-#import "UIView+Local.h"
 #import "FlexRootView.h"
 
 #pragma clang diagnostic push
@@ -28,9 +27,6 @@
     if ([self respondsToSelector:loadSelector]) {
         //hook 加载 node方法
         [FlexNode am_swizzleClassMethodWithOriginSel:loadSelector swizzledSel:@selector(fhr_internalLoadRes:owner:)];
-        
-        //hook createview方法
-        [FlexNode am_swizzleInstanceMethodWithOriginSel:@selector(createView:Name:) swizzledSel:@selector(fhr_createView:name:)];
         
         //开始连接长连接
         [[FlexSocketManager sharedInstance] connect];
@@ -62,14 +58,6 @@
         return localNode;
     }
     return [FlexNode fhr_internalLoadRes:flexName owner:owner];
-}
-
-//创建视图方法
-- (UIView *)fhr_createView:(Class)cls
-                      name:(NSString*)name {
-    UIView *view = [self fhr_createView:cls name:name];
-    view.fhrName = name;
-    return view;
 }
 
 //从localhost加载node
